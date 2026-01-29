@@ -11,14 +11,31 @@ private:
     int age;
 
 public: 
-    Student();
-    ~Student();
+    Student(){
+        cout << "Student object created!" << endl;
+    }
 
-    void setName(string);
-    void setAge(int); 
+    ~Student() {
+        cout << "Student object destroyed!" << endl; 
+    }
 
-    string getName() const; 
-    int getAge() const; 
+    void setName(string s) {
+        name = s; 
+    }
+
+
+    void setAge(int i) {
+        age = i; 
+    } 
+
+    string getName() const {
+        return name; 
+    }
+
+
+    int getAge() const {
+        return age; 
+    } 
 
 }; 
 
