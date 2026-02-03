@@ -1,5 +1,6 @@
-#include "Student.hpp"
-
+#include "Student.hpp" // Includes the Student class definition so we can create Student objects and use its methods.
+// The .hpp file defines what a Student is, while the main file defines what the program does with the Student objects
+// For example, main says here is the data, and the class says I'll decide how to store it... This prevents accidental data corruption
 /*******************************************************************************
  * Function prototypes
 *******************************************************************************/
@@ -19,22 +20,22 @@ void display(const Student[], const int);
  * An integer to signal to the OS the exit code.
 *******************************************************************************/
 
-int main() {
+int main() { // Program executions starts in the main
     // variables
-    const int SIZE = 5;
-    Student objArray[SIZE];
+    const int SIZE = 5; // SIZE is a constant integer of 5 
+    Student objArray[SIZE]; // Creates an array of 5 Student objects (constructor runs for each object)
 
     // get input from the user
-    getInput(objArray, SIZE);
+    getInput(objArray, SIZE); // Calling getInput function fills each Student object with a name and age. 
 
     // modify the ages for certain students
     // uses a range-based for loop with a reference variable
-    for (Student& s : objArray) {
-        s.setAge(modify(s.getAge()));
+    for (Student& s : objArray) { // Loop through each Student in objArray by referrence (so changes will affect the real objects)
+        s.setAge(modify(s.getAge())); // Gets the students age, modifies it if necessary, then sets the updated age back into the object
     }
 
     // display the modified information back to the user
-    display(objArray, SIZE);
+    display(objArray, SIZE); // The display func prints all Student info after that ages have been modified
 
     // terminate
     return 0;
@@ -52,28 +53,29 @@ int main() {
  * Output:
  * N/A
 *******************************************************************************/
-
+// getInput fills the student array with the User's Input 
+// SIZE is constant so that cannot be changed 
 void getInput(Student objArray[], const int SIZE) {
     // temporary variables
-    int    t = 0;
-    string s = "";
+    int    t = 0; // is a temporary integer to hold the age input before storing it in an object.
+    string s = ""; // temporary string to hold the name input before storing it in an object. 
 
-    // for each student
-    for (int i = 0; i < SIZE; i++) {
+    // The for loop runs for each student until it reaches the value of SIZE wich is 5 
+    for (int i = 0; i < SIZE; i++) { // 
         // prompt and store the name of the current student
-        cout << "Enter the name for student #" << i + 1 << ": ";
-        getline(cin, s);
+        cout << "Enter the name for student #" << i + 1 << ": "; // Prompts user; i+1 makes the program print student #'s starting at 1 
+        getline(cin, s); // getline reads the full name including space and stores it into the temporary string s.
 
         // prompt and store for the age of the current student
-        cout << "Enter the age for student #" << i + 1 << ": ";
-        cin >> t;
+        cout << "Enter the age for student #" << i + 1 << ": "; 
+        cin >> t; // cin reads the age into the temporary integer t
 
         // need to ignore the newline for the next iteration
-        cin.ignore();
+        cin.ignore(); // Clears leftover newline so the next getline doesn't get skipped. 
 
         // store the data from the user into the current object in the array
-        objArray[i].setName(s);
-        objArray[i].setAge(t);
+        objArray[i].setName(s); // Calls the Student setter to store the name into the object at index i
+        objArray[i].setAge(t); // Calls the Student setter to store the age into the object at index i
     }
 }
 
@@ -90,20 +92,20 @@ void getInput(Student objArray[], const int SIZE) {
  * Output:
  * The modified age of the student.
 *******************************************************************************/
-
-int modify(int i) {
+// This function takes an age and returns a modieifed age if it's outside the allowed range. 
+int modify(int i) { 
     // younger students should bump their age up to 18
-    if (i < 18) {
-        i = 18;
+    if (i < 18) { // the if statement checks is the age is smaller than 18 
+        i = 18; // and if so, the age is set to 18. 
     }
 
     // older students should bump their age down to 50
-    else if (i > 50) {
-        i = 50;
+    else if (i > 50) { // otherwise, the else if statement checks if the age is bigger than 50 
+        i = 50; // and if so, the it sets the age to 50. 
     }
 
     // return the modified age
-    return i;
+    return i; // returns modified changes and puts it back into the array
 }
 
 /*******************************************************************************
@@ -119,17 +121,19 @@ int modify(int i) {
  * N/A
 *******************************************************************************/
 
-void display(const Student objArray[], const int SIZE) {
+// Function prints student names and their ages 
+// objArray is constant so we dont accidentally change objects 
+void display(const Student objArray[], const int SIZE) { 
     // counter variable
-    int i = 0;
+    int i = 0; // Initilaizes index counter for the while loop 
 
     // iterate through each student
-    while (i < SIZE) {
+    while (i < SIZE) { // while loop continues looping until i reaches SIZE. 
         // display the student's information
-        cout << "Student #" << i + 1 << endl;
-        cout << "\tName: " << objArray[i].getName() << endl;
-        cout << "\tAge: " << objArray[i].getAge() << endl << endl;
-
+        cout << "Student #" << i + 1 << endl; // Prints the student number starting from 1
+        cout << "\tName: " << objArray[i].getName() << endl; // Use getName() to print the student's stored name. 
+        cout << "\tAge: " << objArray[i].getAge() << endl << endl; // Use getAge() to print the student's stored age
+       
         // update the counter
         i++;
     }
